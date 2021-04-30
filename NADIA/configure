@@ -3100,8 +3100,8 @@ fi
 
 #if test "$enable_idl_lib" = "yes"
 #then
-	IDL_FLAG="DO_IDL=TRUE"
-	do_idl=$IDL_FLAG
+#	IDL_FLAG="DO_IDL=TRUE"
+#	do_idl=$IDL_FLAG
 
 #	if test "$with_idl_inc" != ""
 #	then
