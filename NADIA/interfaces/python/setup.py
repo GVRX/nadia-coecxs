@@ -8,6 +8,10 @@ from Cython.Build.Dependencies import create_extension_list
 libNADIAIncludeDir=os.path.join('..','..','include')
 libNADIALibDir=os.path.join('..','..','lib')
 
+# added gvr
+libHDFIncludeDir='/usr/local/hdf4/include'
+libHDFLibDir='/usr/local/hdf4/lib'
+
 DoublePrecision='0'
 
 os.environ["LD_RUN_PATH"]=os.path.join('..','..','lib')
@@ -16,9 +20,9 @@ modules = create_extension_list([os.path.join('pyNADIA','*.pyx')])
 
 for module in modules:
     module.language="c++"
-    module.include_dirs=[".",libNADIAIncludeDir ]
+    module.include_dirs=[".",libNADIAIncludeDir,libHDFIncludeDir,libHDFLibDir ]
     module.libraries=['tiff', 'm', 'df', 'z','mfhdf', 'stdc++', 'jpeg','NADIA']
-    module.library_dirs=[libNADIALibDir]
+    module.library_dirs=[libNADIALibDir,libHDFLibDir]
     module.runtime_library_dirs=[libNADIALibDir]
     module.package="pyNADIA"
     print module.name
