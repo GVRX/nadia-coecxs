@@ -25,13 +25,13 @@ endif
 
 
 
-#install:
-#	mkdir -p $(PREFIX)/include
-#	cp src/*.h $(PREFIX)/include
-#	mkdir -p $(PREFIX)/lib
-#	cp src/lib* $(PREFIX)/lib/
-#	mkdir -p bin $(PREFIX)/bin/
-#	cp tools/*.exe $(PREFIX)/bin/
+install:
+	mkdir -p $(PREFIX)/include
+	cp src/*.h $(PREFIX)/include
+	mkdir -p $(PREFIX)/lib
+	cp src/lib* $(PREFIX)/lib/
+	mkdir -p bin $(PREFIX)/bin/
+	cp tools/*.exe $(PREFIX)/bin/
 
 clean: 
 	make clean -C src
