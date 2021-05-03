@@ -27,9 +27,9 @@ endif
 
 install:
 	mkdir -p $(PREFIX)/include
-	cp src/*.h $(PREFIX)/include
+	cp include/*.h $(PREFIX)/include
 	mkdir -p $(PREFIX)/lib
-	cp src/lib* $(PREFIX)/lib/
+	cp lib* $(PREFIX)/lib/
 	mkdir -p bin $(PREFIX)/bin/
 	cp tools/*.exe $(PREFIX)/bin/
 
