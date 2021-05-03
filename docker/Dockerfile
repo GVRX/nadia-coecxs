@@ -36,7 +36,6 @@ RUN yum -y  update \
 
 ENV LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
 #ENV CC=/usr/lib64/openmpi/bin/mpicc
-ENV /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 WORKDIR /tmp
 COPY requirements.txt requirements.txt
@@ -57,13 +56,18 @@ RUN wget https://support.hdfgroup.org/ftp/HDF/releases/HDF4.2.14/src/hdf-4.2.14.
 
 WORKDIR /opt
 ARG HDF=/usr/local/hdf4
+ARG PREFIX=/usr/local/nadia
 ENV LD_LIBRARY_PATH=/opt/nadia-coecxs/NADIA/interfaces/python/pyNADIA:$HDF:$LD_LIBRARY_PATH
+ENV LD_RUN_PATH=/opt/nadia-coecxs/NADIA/interfaces/python:/opt/nadia-coecxs/NADIA/interfaces/python/pyNADIA:/usr/local/NADIA/lib:/usr/local/hdf4/lib:$LD_RUN_PATH
+
 
 RUN git clone https://github.com/GVRX/nadia-coecxs.git\
     && cd nadia-coecxs/NADIA \
     && mkdir lib \
     && mkdir bin \
-    && mkdir interfaces/python/ext \
     && export DO_IDL=FALSE \
-    && ./configure  --prefix=/usr/local/nadia --with-mfhdf_lib=$HDF/lib/ --with-mfhdf_inc=$HDF/include \ 
-    && make
+    && ./configure  --prefix=$PREFIX --with-mfhdf_lib=$HDF/lib/ --with-mfhdf_inc=$HDF/include \ 
+    && make \
+    && make install \
+    && cd interfaces/python \
+    && make 
